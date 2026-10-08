@@ -4,7 +4,7 @@ import numpy as np
 from insightface.app import FaceAnalysis
 from numpy.linalg import norm
 
-KNOWN_DIR = "task5/images/"
+KNOWN_DIR = "face_recognition/images/"
 THRESHOLD = 0.5
 FRAME_SKIP = 5  
 

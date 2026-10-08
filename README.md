@@ -1,119 +1,49 @@
-# Face Detection and Recognition using InsightFace
+Face Detection and Recognition using InsightFace & ArcFace
 
-A real-time **face detection and recognition system** built with Python, OpenCV, and InsightFace. The system detects faces from a webcam, generates face embeddings using the **ArcFace** recognition model, compares them with registered face embeddings using **Cosine Similarity**, and identifies the person when the similarity score exceeds a predefined threshold.
+A real-time face detection and recognition system built using Python, OpenCV, and InsightFace. The system detects faces from a webcam, generates facial embeddings using the ArcFace model, compares them with registered face embeddings using Cosine Similarity, and identifies the person when the similarity score is above the configured threshold.
 
----
+🚀 Project Overview
 
-## 📌 Project Overview
+This project performs real-time face recognition using a computer's webcam.
 
-This project provides real-time face recognition through a webcam.
+The system first loads images of known people from the face_recognition/images/ directory. It generates a facial embedding for each registered face using InsightFace.
 
-The system works by:
+During webcam operation, the system:
 
-1. Loading registered/known face images.
-2. Detecting faces in the registered images.
-3. Generating facial embeddings using InsightFace.
-4. Capturing live video from the webcam.
-5. Detecting faces in the video stream.
-6. Generating embeddings for detected faces.
-7. Comparing live embeddings with known embeddings.
-8. Identifying the person using Cosine Similarity.
-9. Displaying the person's name and similarity score on the video.
+Captures live video frames.
+Detects faces using InsightFace.
+Generates an embedding for each detected face.
+Compares the embedding with registered face embeddings.
+Finds the closest matching face using Cosine Similarity.
+Identifies the person if the similarity exceeds the threshold.
+Displays the person's name and similarity score on the webcam.
 
-If no registered person matches the detected face above the configured threshold, the system labels the person as **Unknown**.
+If no sufficiently similar face is found, the system displays Unknown.
 
----
-
-## ✨ Features
-
-* 🎥 Real-time webcam face recognition
-* 👤 Face detection using InsightFace
-* 🧠 Face recognition using ArcFace
-* 🔢 Face embedding generation
-* 📊 Cosine similarity-based face matching
-* 🏷️ Known/Unknown person identification
-* ⚡ Frame skipping for improved performance
-* 🖼️ Support for multiple registered faces
-* 💻 CPU-based inference
-* 📈 Displays recognition confidence/similarity score
-
----
-
-## 🛠️ Technologies Used
-
-| Technology        | Purpose                                      |
-| ----------------- | -------------------------------------------- |
-| Python            | Core programming language                    |
-| OpenCV            | Webcam access, image processing and display  |
-| InsightFace       | Face detection and recognition               |
-| ArcFace           | Facial feature/embedding generation          |
-| NumPy             | Numerical operations and vector calculations |
-| Cosine Similarity | Comparing facial embeddings                  |
-
----
-
-## 🧠 How It Works
-
-The system follows the following pipeline:
-
-```text
-             ┌─────────────────────┐
-             │  Known Face Images  │
-             └──────────┬──────────┘
-                        │
-                        ▼
-             ┌─────────────────────┐
-             │  Face Detection     │
-             └──────────┬──────────┘
-                        │
-                        ▼
-             ┌─────────────────────┐
-             │ ArcFace Embeddings  │
-             └──────────┬──────────┘
-                        │
-                        ▼
-             ┌─────────────────────┐
-             │ Store Embeddings    │
-             └──────────┬──────────┘
-                        │
-                        │
-       ┌────────────────▼────────────────┐
-       │        Webcam Video            │
-       └────────────────┬────────────────┘
-                        │
-                        ▼
-             ┌─────────────────────┐
-             │ Detect Live Face    │
-             └──────────┬──────────┘
-                        │
-                        ▼
-             ┌─────────────────────┐
-             │ Generate Embedding  │
-             └──────────┬──────────┘
-                        │
-                        ▼
-             ┌─────────────────────┐
-             │ Cosine Similarity   │
-             └──────────┬──────────┘
-                        │
-                ┌───────┴────────┐
-                │                │
-             Match            No Match
-                │                │
-                ▼                ▼
-        ┌──────────────┐   ┌───────────┐
-        │ Person Name  │   │  Unknown  │
-        └──────────────┘   └───────────┘
-```
-
----
-
-## 📂 Project Structure
-
-```text
-Face-Detection-Recognition/
+✨ Features
+🎥 Real-time webcam face recognition
+👤 Face detection using InsightFace
+🧠 Face recognition using ArcFace
+🔢 Facial embedding generation
+📊 Cosine similarity-based matching
+🏷️ Known and Unknown face identification
+⚡ Frame skipping for better performance
+👥 Support for multiple registered faces
+💻 CPU-based inference
+📈 Real-time similarity score display
+🟩 Face bounding box visualization
+🛠️ Technologies Used
+Technology	Purpose
+Python	Main programming language
+OpenCV	Webcam access, image processing and visualization
+InsightFace	Face detection and recognition
+ArcFace	Facial embedding generation
+NumPy	Numerical and vector operations
+Cosine Similarity	Comparing face embeddings
+📂 Project Structure
+Face-Recognition/
 │
-├── task5/
+├── face_recognition/
 │   │
 │   ├── images/
 │   │   ├── person1.jpg
@@ -122,392 +52,384 @@ Face-Detection-Recognition/
 │   │
 │   └── face_detection.py
 │
-├── README.md
-└── requirements.txt
-```
+├── requirements.txt
+├── .gitignore
+└── README.md
+face_recognition/images/
 
-### `task5/images/`
+This folder contains the reference images of people who should be recognized.
 
-This folder contains the images of people who should be recognized by the system.
-
-The filename is used as the person's name.
+The filename is automatically used as the person's name.
 
 For example:
 
-```text
-images/
-├── Rahul.jpg
+face_recognition/images/
 ├── Sumit.jpg
+├── Rahul.jpg
 └── Priya.jpg
-```
 
-The system will display:
+The system will use:
 
-```text
-Rahul
 Sumit
-Priya
-```
+siddhu
+satish
+aditya
 
-when the corresponding faces are recognized.
+as the corresponding recognition labels.
 
----
+Tip: Use clear, front-facing images containing one face for better recognition results.
 
-# ⚙️ Installation
+⚙️ Installation
+1. Clone the Repository
+git clone https://github.com/yourusername/face-recognition.git
 
-## 1. Clone the Repository
+Navigate to the project:
 
-```bash
-git clone https://github.com/yourusername/face-detection-recognition.git
-```
-
-Move into the project directory:
-
-```bash
-cd face-detection-recognition
-```
-
----
-
-## 2. Create a Virtual Environment
-
-It is recommended to use a virtual environment.
-
-### Windows
-
-```bash
+cd face-recognition
+2. Create a Virtual Environment
+Windows
 python -m venv .venv
-```
 
 Activate it:
 
-```bash
 .venv\Scripts\activate
-```
-
-### Linux/macOS
-
-```bash
+Linux/macOS
 python3 -m venv .venv
+
+Activate it:
+
 source .venv/bin/activate
-```
-
----
-
-## 3. Install Dependencies
+3. Install Dependencies
 
 Install the required packages:
 
-```bash
 pip install -r requirements.txt
-```
 
-Example `requirements.txt`:
+Example requirements.txt:
 
-```text
 opencv-python
 numpy
 insightface
 onnxruntime
-```
 
-For CPU-based execution, `onnxruntime` is sufficient.
+The project uses CPUExecutionProvider, so onnxruntime is sufficient for CPU inference.
 
----
+▶️ Running the Project
 
-# ▶️ Running the Project
+First, make sure the reference face images are present in:
 
-Make sure your registered face images are inside:
+face_recognition/images/
 
-```text
-task5/images/
-```
+Then run the Python program:
 
-Then run:
+python face_recognition/face_recognition.py
 
-```bash
-python task5/face_detection.py
-```
+The webcam will open automatically.
 
-The webcam will open and start detecting and recognizing faces.
+The system will detect and recognize faces in real time.
 
-To stop the program, press:
+Exit the application
 
-```text
+Press:
+
 Q
-```
 
----
+to close the webcam window.
 
-# 🔍 Face Recognition Process
+🧠 System Workflow
+              Reference Images
+                     │
+                     ▼
+             Face Detection
+                     │
+                     ▼
+            ArcFace Embedding
+                     │
+                     ▼
+           Store Face Embeddings
+                     │
+                     │
+                     ▼
+              Webcam Input
+                     │
+                     ▼
+             Detect Live Face
+                     │
+                     ▼
+           Generate Embedding
+                     │
+                     ▼
+          Cosine Similarity
+                     │
+              ┌──────┴──────┐
+              │             │
+           Match         No Match
+              │             │
+              ▼             ▼
+        Person Name      "Unknown"
+🔍 How the Code Works
+1. Import Required Libraries
+import cv2
+import os
+import numpy as np
+from insightface.app import FaceAnalysis
+from numpy.linalg import norm
 
-## 1. Load Known Faces
+These libraries provide:
 
-The program reads all images from:
+Webcam and image processing
+File handling
+Numerical operations
+Face detection and recognition
+Vector normalization
+2. Configure the Project
+KNOWN_DIR = "face_recognition/images/"
+THRESHOLD = 0.5
+FRAME_SKIP = 5
+KNOWN_DIR
 
-```python
-KNOWN_DIR = "task5/images/"
-```
+Specifies the location of registered face images.
 
-Each valid image is processed using InsightFace.
+THRESHOLD
 
----
+Defines the minimum similarity score required to recognize a person.
 
-## 2. Generate Face Embeddings
+Similarity >= 0.5 → Recognized
+Similarity < 0.5  → Unknown
+FRAME_SKIP
 
-InsightFace detects the face and generates a numerical representation called a **face embedding**.
+Controls how frequently face detection is performed.
 
-```python
+FRAME_SKIP = 5
+
+means face detection is performed every fifth frame.
+
+🤖 InsightFace and ArcFace
+
+The project initializes InsightFace using:
+
+app = FaceAnalysis(
+    name="buffalo_l",
+    providers=["CPUExecutionProvider"]
+)
+
+The buffalo_l model provides the required face analysis capabilities.
+
+The model is prepared with:
+
+app.prepare(
+    ctx_id=0,
+    det_size=(640, 640)
+)
+👤 Registering Known Faces
+
+The program reads every image from:
+
+face_recognition/images/
+
+Each image is processed using:
+
 faces = app.get(img)
-```
 
-The embedding is extracted using:
+If a face is detected, its embedding is stored:
 
-```python
-faces[0].embedding
-```
+known_embeddings.append(faces[0].embedding)
 
-These embeddings represent important facial characteristics.
+The filename is stored as the person's name:
 
----
+known_names.append(os.path.splitext(file)[0])
 
-## 3. Capture Webcam Input
+For example:
 
-OpenCV accesses the computer's webcam:
+satish.jpg → Satish
+Sumit.jpg → Sumit
+📐 Cosine Similarity
 
-```python
-cap = cv2.VideoCapture(0)
-```
+The project compares face embeddings using Cosine Similarity.
 
-The system continuously reads frames from the webcam.
-
----
-
-## 4. Detect Faces
-
-InsightFace detects faces in the current frame:
-
-```python
-faces = app.get(frame)
-```
-
-Each detected face contains information such as:
-
-* Bounding box
-* Face embedding
-* Detection information
-
----
-
-## 5. Compare Face Embeddings
-
-The live face embedding is compared with the stored embeddings.
-
-The project uses **Cosine Similarity**:
-
-```python
 def cosine_similarity(a, b):
     return np.dot(a, b) / (norm(a) * norm(b))
-```
 
-A higher similarity value indicates that the two face embeddings are more similar.
+Conceptually:
 
----
+                 A · B
+Similarity = ─────────────
+             ||A|| × ||B||
 
-## 6. Identify the Person
+The resulting score is used to determine which registered face is most similar to the detected face.
 
-The system finds the highest similarity score:
+🎯 Face Matching
 
-```python
+The system calculates similarity between the live face and every known face:
+
+similarities = [
+    cosine_similarity(emb, known_emb)
+    for known_emb in known_embeddings
+]
+
+It then selects the highest score:
+
 best_idx = np.argmax(similarities)
-```
 
-Then it checks the threshold:
+The corresponding person is selected if the score passes the threshold:
 
-```python
-THRESHOLD = 0.5
-```
+name = (
+    known_names[best_idx]
+    if best_score >= THRESHOLD
+    else "Unknown"
+)
+⚡ Frame Skipping
 
-If:
+Face recognition can be computationally expensive, especially when running on a CPU.
 
-```text
-Similarity >= 0.5
-```
+Therefore, the project uses:
 
-the person is considered recognized.
-
-Otherwise:
-
-```text
-Unknown
-```
-
----
-
-# ⚡ Performance Optimization
-
-The project uses **frame skipping** to reduce the computational workload.
-
-```python
 FRAME_SKIP = 5
-```
 
-Instead of running face detection on every webcam frame, the system performs detection periodically and reuses the previously detected faces between detection frames.
+Instead of detecting faces on every frame, the program performs detection periodically and reuses the previous detection results between detection frames.
 
-This can improve real-time performance, especially when running InsightFace on a CPU.
+This helps improve the responsiveness of the webcam application.
 
----
+📷 Real-Time Output
 
-# 📊 Recognition Output
+When a known person is detected, the system displays:
 
-The webcam displays a bounding box around detected faces.
+┌─────────────────────┐
+│                     │
+│      Face           │
+│                     │
+└─────────────────────┘
+      Sumit (0.72)
 
-Example:
+The bounding box shows the detected face, while the label contains:
 
-```text
-┌─────────────────────────────┐
-│                             │
-│       ┌───────────┐         │
-│       │           │         │
-│       │    Face   │         │
-│       │           │         │
-│       └───────────┘         │
-│       Sumit (0.72)          │
-│                             │
-└─────────────────────────────┘
-```
+Person Name (Similarity Score)
 
-The displayed value represents the similarity score between the detected face and the closest known face.
+For example:
 
----
+Sumit (0.72)
 
-# 🧮 Cosine Similarity
+If the similarity score is below the threshold:
 
-Cosine similarity measures the similarity between two vectors.
+Unknown (0.43)
+📊 Recognition Logic
 
-For two face embeddings **A** and **B**:
+The recognition process can be summarized as:
 
-```text
-Cosine Similarity =
-(A · B) / (||A|| × ||B||)
-```
+Live Face
+    │
+    ▼
+Generate Embedding
+    │
+    ▼
+Compare with Known Embeddings
+    │
+    ▼
+Find Highest Similarity
+    │
+    ▼
+Is Score >= 0.5?
+    │
+ ┌──┴──┐
+ │     │
+Yes    No
+ │     │
+ ▼     ▼
+Name  Unknown
+🎯 Configuration
 
-In this project, the vectors are the face embeddings generated by ArcFace.
+The main parameters can be modified according to your requirements.
 
-A higher value generally indicates greater similarity between the facial representations.
+Parameter	Current Value	Purpose
+KNOWN_DIR	face_recognition/images/	Location of registered images
+THRESHOLD	0.5	Recognition threshold
+FRAME_SKIP	5	Number of frames between detection
+det_size	(640, 640)	Face detection resolution
+provider	CPU	Hardware execution provider
+🔐 Privacy & Security
 
----
+Facial recognition involves biometric information. For real-world applications:
 
-# 🎯 Threshold
+Obtain consent before registering people's faces.
+Store face images and embeddings securely.
+Avoid collecting unnecessary personal information.
+Do not use the system for unauthorized surveillance.
+Follow applicable privacy and data-protection regulations.
 
-The project uses:
+This project is intended primarily for educational and development purposes.
 
-```python
-THRESHOLD = 0.5
-```
+🚀 Future Improvements
 
-The threshold determines whether the best matching face should be considered a known person.
+The current project can be extended with:
 
-```text
-Similarity >= Threshold
-        │
-        ├── Yes → Recognized
-        │
-        └── No  → Unknown
-```
+Face registration through webcam
 
-The optimal threshold can vary depending on the dataset, image quality, camera conditions, and recognition requirements.
+Multiple reference images per person
 
----
+SQLite/PostgreSQL face database
 
-# 🔐 Privacy Considerations
+Attendance management
 
-This project processes faces from the local webcam and locally stored images.
+Automatic attendance logging
 
-For real-world deployment:
+CSV/Excel attendance export
 
-* Obtain appropriate consent before collecting facial data.
-* Protect stored face images and embeddings.
-* Avoid storing unnecessary biometric information.
-* Follow applicable privacy and data-protection requirements.
-* Do not use the system for unauthorized surveillance.
+Web interface using Streamlit
 
----
+GPU acceleration
 
-# 🚀 Future Improvements
+Face anti-spoofing
 
-The project can be extended with:
+Liveness detection
 
-* [ ] Multiple images per person for better recognition
-* [ ] Face database using SQLite/PostgreSQL
-* [ ] Web-based interface using Streamlit
-* [ ] GPU acceleration
-* [ ] Face registration module
-* [ ] Attendance management
-* [ ] Recognition history
-* [ ] CSV/Excel attendance export
-* [ ] Real-time attendance dashboard
-* [ ] Unknown-face logging
-* [ ] Face anti-spoofing/liveness detection
-* [ ] Improved threshold calibration
-* [ ] Support for multiple faces in the same frame
+Recognition history
 
----
+Unknown-face logging
 
-# 📌 Applications
+Automatic threshold calibration
 
-This technology can be used as a foundation for:
+Improved handling of multiple faces
 
-* Smart attendance systems
-* Access-control prototypes
-* Face-based authentication
-* Personal identification systems
-* Security research
-* Computer vision projects
-* AI/ML learning projects
-
----
-
-# 📚 Key Concepts Demonstrated
+📚 Concepts Demonstrated
 
 This project demonstrates practical implementation of:
 
-* Computer Vision
-* Face Detection
-* Face Recognition
-* Deep Learning
-* Face Embeddings
-* ArcFace
-* Similarity Measurement
-* Cosine Similarity
-* Real-Time Video Processing
-* OpenCV
-* InsightFace
-* Python
+Computer Vision
+Face Detection
+Face Recognition
+Deep Learning
+Face Embeddings
+ArcFace
+InsightFace
+OpenCV
+Cosine Similarity
+Real-Time Video Processing
+Python
+Vector Similarity
+💼 Internship Project
 
----
+This project was developed as part of the CodSoft Artificial Intelligence Internship.
 
-# 👨‍💻 Author
+Task: Face Detection and Recognition
 
-**Sumit Santosh Patil**
+The project demonstrates the practical application of computer vision and deep-learning-based face recognition techniques.
 
-Bachelor of Engineering (B.E.) – Computer Engineering
+👨‍💻 Author
+
+Sumit Santosh Patil
+
+Bachelor of Engineering (B.E.) in Computer Engineering
 Dhole Patil College of Engineering, Pune
 Expected Graduation: 2027
 
----
-
-# ⭐ Acknowledgements
+⭐ Acknowledgements
 
 This project uses the following open-source technologies:
 
-* OpenCV
-* InsightFace
-* ArcFace
-* NumPy
-
----
-
-## 📄 License
+InsightFace
+ArcFace
+OpenCV
+NumPy
+📄 License
 
 This project is intended for educational and learning purposes.
